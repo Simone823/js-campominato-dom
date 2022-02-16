@@ -1,14 +1,14 @@
 // Recupero dal dom l'elemento select che contiene le opzioni
 const selectElement = document.getElementById("select-difficulty");
-console.log(selectElement);
+// console.log(selectElement);
 
 // Recupero dal dom il pulsante play
 const playButton = document.querySelector(".play");
-console.log(playButton);
+// console.log(playButton);
 
 // Recupero dal dom il div container_main
 const containerMain = document.querySelector(".container_main");
-console.log(containerMain);
+// console.log(containerMain);
 
 
 // Funzione start game
@@ -32,6 +32,7 @@ const startGame = () => {
         // Una volta cliccato l'elemento, al secondo click non cambia nulla
         squareClicked.removeEventListener ("click", squareActive); 
     }
+
 
 
     switch (selectedOption) {
@@ -63,6 +64,24 @@ const startGame = () => {
 
             }
 
+
+
+            // Funzione per generare un numero random
+            function getRandomInt(min, max) {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+            const bomb = getRandomInt(1, 100);
+            console.log(bomb);
+
+            // Array numeri random fino a 16
+            let numRandom = [];
+            console.log(numRandom);
+            while (numRandom.length < 16){
+                const bomb = getRandomInt(1, 100);
+                numRandom.push(bomb);
+            }
 
             break;
 
