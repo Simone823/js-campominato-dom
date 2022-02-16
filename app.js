@@ -19,7 +19,26 @@ const startGame = () => {
     // Costante contenente il valore dell'opzione selezionata
     let selectedOption = selectElement.options[selectElement.selectedIndex].value;
     console.log(selectedOption);
+    
+    let arry = [];
 
+    // Funzione per generare un numero random
+    const RandomBomb = (min, max) => {
+
+        for (let i = 0; i < 16; i++) {
+
+            let numeriRandom = Math.floor(Math.random() * (max - min) + min);
+            console.log(numeriRandom);
+            arry.push(numeriRandom);
+
+
+        }
+
+        return arry;
+    }
+    
+
+    // Funzione che attiva la classe active al click di square
     function squareActive() {
 
         // Dichiaro una varibiale con il valore dell'elemento cliccato
@@ -35,6 +54,7 @@ const startGame = () => {
 
 
 
+    // Switch livelli game
     switch (selectedOption) {
 
         case "----Seleziona un livello----":
@@ -44,7 +64,7 @@ const startGame = () => {
 
 
         case "easy":
-            console.log("difficoltà easy");
+            // console.log("difficoltà easy");
 
             // Ciclo for per creare div square e numeri fino a 100
             for (let i = 1; i < 101; i++) {
@@ -60,33 +80,20 @@ const startGame = () => {
                 // Aggiungo i numeri all'interno di square
                 square.innerHTML = i;
 
+                // Al click di square aggiungo la funzione squareActive che imposta il colore blu
                 square.addEventListener("click", squareActive); 
-
+                
             }
-
-
-
-            // Funzione per generare un numero random
-            function getRandomInt(min, max) {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min) + min);
-            }
-            const bomb = getRandomInt(1, 100);
-            console.log(bomb);
-
-            // Array numeri random fino a 16
-            let numRandom = [];
-            console.log(numRandom);
-            while (numRandom.length < 16){
-                const bomb = getRandomInt(1, 100);
-                numRandom.push(bomb);
-            }
+            
+            // Richiamo funzione bombeRandom con valore minimo 1 e massimo 100
+            arryBombe = RandomBomb(1, 100);
+            console.log(arryBombe);
 
             break;
 
+
         case "hard":
-            console.log("difficoltà hard");
+            // console.log("difficoltà hard");
 
             // Ciclo for per creare div square e numeri fino a 100
             for (let i = 1; i < 82; i++) {
@@ -102,15 +109,20 @@ const startGame = () => {
                 // Aggiungo i numeri all'interno di square
                 square.innerHTML = i;
 
+                // Al click di square aggiungo la funzione squareActive che imposta il colore blu
                 square.addEventListener("click", squareActive); 
 
             }
 
+            // Richiamo funzione bombeRandom con valore minimo 1 e massimo 81
+            arryBombe = RandomBomb(1, 81);
+            console.log(arryBombe);
+
             break;
 
-        case "crazy":
-            console.log("difficoltà crazy");
 
+        case "crazy":
+            // console.log("difficoltà crazy");
 
             // Ciclo for per creare div square e numeri fino a 100
             for (let i = 1; i < 50; i++) {
@@ -127,8 +139,14 @@ const startGame = () => {
                 // Aggiungo i numeri all'interno di square
                 square.innerHTML = i;
 
+                // Al click di square aggiungo la funzione squareActive che imposta il colore blu
                 square.addEventListener("click", squareActive); 
             }
+
+            // Richiamo funzione bombeRandom con valore minimo 1 e massimo 49
+            arryBombe = randomBomb(1, 49);
+            console.log(arryBombe);
+
             break;
     }
 
