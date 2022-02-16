@@ -20,21 +20,24 @@ const startGame = () => {
     let selectedOption = selectElement.options[selectElement.selectedIndex].value;
     console.log(selectedOption);
     
-    let arry = [];
+    let numeriBombs = [];
 
     // Funzione per generare un numero random
-    const RandomBomb = (min, max) => {
+    const randomBomb = (min, max) => {
 
+        // Ciclo for per generare numeri finche la lunghezza dell'array numeriBomb
         for (let i = 0; i < 16; i++) {
 
             let numeriRandom = Math.floor(Math.random() * (max - min) + min);
             console.log(numeriRandom);
-            arry.push(numeriRandom);
 
+            if (!numeriBombs.includes(numeriRandom)){
+                numeriBombs.push(numeriRandom);
+            }
 
         }
 
-        return arry;
+        return numeriBombs;
     }
     
 
@@ -47,6 +50,12 @@ const startGame = () => {
 
         // Aggiungo la classe active a square
         squareClicked.classList.add("active");
+
+        // Se il numero all'interno di squareClicked è presente nel mio array di numeri random, aggiungo la classe isbomb
+        if (numeriBombs.includes(parseInt(squareClicked.innerHTML))) {
+            console.log("bomba");
+            squareClicked.classList.add("isbomb");
+        }
 
         // Una volta cliccato l'elemento, al secondo click non cambia nulla
         squareClicked.removeEventListener ("click", squareActive); 
@@ -86,7 +95,7 @@ const startGame = () => {
             }
             
             // Richiamo funzione bombeRandom con valore minimo 1 e massimo 100
-            arryBombe = RandomBomb(1, 100);
+            arryBombe = randomBomb(1, 100);
             console.log(arryBombe);
 
             break;
@@ -115,7 +124,7 @@ const startGame = () => {
             }
 
             // Richiamo funzione bombeRandom con valore minimo 1 e massimo 81
-            arryBombe = RandomBomb(1, 81);
+            arryBombe = randomBomb(1, 81);
             console.log(arryBombe);
 
             break;
