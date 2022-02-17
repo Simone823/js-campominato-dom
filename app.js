@@ -25,17 +25,28 @@ const startGame = () => {
     // Funzione per generare un numero random
     const randomBomb = (min, max) => {
 
-        // Ciclo for per generare numeri finche la lunghezza dell'array numeriBomb
-        for (let i = 0; i < 16; i++) {
-
+        do {
             let numeriRandom = Math.floor(Math.random() * (max - min) + min);
             console.log(numeriRandom);
 
-            if (!numeriBombs.includes(numeriRandom)){
+            if (numeriBombs.includes(numeriRandom) === false){
                 numeriBombs.push(numeriRandom);
             }
 
-        }
+        } while (numeriBombs.length < 16);
+
+
+        // Ciclo for per generare numeri finche la lunghezza dell'array numeriBomb
+        // for (let i = 0; i < 16; i++) {
+
+        //     let numeriRandom = Math.floor(Math.random() * (max - min) + min);
+        //     console.log(numeriRandom);
+
+        //     if (!numeriBombs.includes(numeriRandom)){
+        //         numeriBombs.push(numeriRandom);
+        //     }
+
+        // }
 
         return numeriBombs;
     }
