@@ -10,17 +10,32 @@ const playButton = document.querySelector(".play");
 const containerMain = document.querySelector(".container_main");
 // console.log(containerMain);
 
+// Recupero dal dom il contenitore div user-score
+const userScoreHtml = document.querySelector(".user-score");
+// console.log(userScoreHtml);
+
+// Score utente
+let score = 0;
+
+// Array numeri bombe
+let numeriBombs = [];
+
+// Array contenente tutti i quadratini
+let arraySquare = [];
+console.log(arraySquare);
+
+
 
 // Funzione start game
 const startGame = () => {
 
+    // Reset contenuto html del contenitore degli square e userScore
     containerMain.innerHTML = "";
+    userScoreHtml.innerHTML = "";
 
     // Costante contenente il valore dell'opzione selezionata
     let selectedOption = selectElement.options[selectElement.selectedIndex].value;
     console.log(selectedOption);
-    
-    let numeriBombs = [];
 
     // Funzione per generare un numero random
     const randomBomb = (min, max) => {
@@ -59,17 +74,33 @@ const startGame = () => {
         const squareClicked = this;
         console.log(squareClicked);
 
-        // Aggiungo la classe active a square
-        squareClicked.classList.add("active");
-
         // Se il numero all'interno di squareClicked è presente nel mio array di numeri random, aggiungo la classe isbomb
         if (numeriBombs.includes(parseInt(squareClicked.innerHTML))) {
             console.log("bomba");
-            squareClicked.classList.add("isbomb");
+
+            // Aggiungo la class isbomb
+            squareClicked.classList.add("isbomb"); 
+
+            // Richiamo la funzione gameOver
+            gameOver(score);
+
+        } else {
+            // Aggiungo la classe active a square
+            squareClicked.classList.add("active");
+            
+            // Incremento lo score
+            score++;
+            console.log(score);
         }
 
         // Una volta cliccato l'elemento, al secondo click non cambia nulla
         squareClicked.removeEventListener ("click", squareActive); 
+    }
+
+    // Funzione gameOver
+    function gameOver(score){
+        console.log(score);
+        userScoreHtml.innerHTML = `Hai perso! Il tuo punteggio è di ${score} punti`;
     }
 
 
@@ -97,12 +128,14 @@ const startGame = () => {
                 // Aggiunto i quadratini dentro il container_main
                 containerMain.append(square);
 
+                // Aggiungo i quadratini all'interno del mio arraySquare
+                arraySquare.push(square);
+
                 // Aggiungo i numeri all'interno di square
                 square.innerHTML = i;
 
                 // Al click di square aggiungo la funzione squareActive che imposta il colore blu
-                square.addEventListener("click", squareActive); 
-                
+                square.addEventListener("click", squareActive);    
             }
             
             // Richiamo funzione bombeRandom con valore minimo 1 e massimo 100
